@@ -1,5 +1,6 @@
 import React, { useState }  from 'react';
 import {
+  ActivityIndicator,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import { useFocusEffect } from "@react-navigation/native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import theme from '../styles/theme';
 
 const JokesScreen = () => {
   const [joke, setJoke] = useState({});
@@ -28,6 +30,7 @@ const JokesScreen = () => {
           <Pressable
             style={styles.button}
             onPress={() => setPunchlineVisible(true)}>
+              {!joke?.punchline && <ActivityIndicator size={30} color={theme.mainLightColor} style={{padding: 30, paddingBottom: 5}}/>}
               <Text style ={styles.buttonText}>{joke.setup}</Text>
             </Pressable>
             {punchlineVisible &&
@@ -48,6 +51,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     alignItems: 'center',
+    backgroundColor: theme.backgroundColor
   },
   text: {
     fontSize: 70,
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   button: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: theme.lightGreyColor,
     borderRadius:10,
     justifyContent: 'center',
     marginTop: 50,
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'darkblue'
+    color: theme.mainAccentColor
   }
 })
 
