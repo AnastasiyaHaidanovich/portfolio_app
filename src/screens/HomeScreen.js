@@ -17,9 +17,14 @@ const HomeScreen = ({ navigation }) => {
         <View>
           <Text style={styles.text}>Main Screen</Text>
         </View>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('ToDo')}>
+            <Text style ={styles.buttonText}>ToDo list</Text>
+        </Pressable>
       </ScrollView>
       <Pressable
-        style={styles.button}
+        style={{...styles.button, width: '94%'}}
         onPress={() => navigation.navigate('Joke')}>
           <Text style ={styles.buttonText}>Cheer up!</Text>
       </Pressable>
@@ -32,7 +37,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     alignItems: 'center',
-    backgroundColor: theme.backgroundColor
+    backgroundColor: theme.backgroundColor,
   },
   text: {
     fontSize: 70,
@@ -42,8 +47,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: theme.mainLightColor,
-    margin: 10,
-    width: '95%',
+    marginBottom: 10,
+    width: '100%',
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
