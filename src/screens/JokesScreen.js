@@ -1,5 +1,6 @@
 import React, { useState }  from 'react';
 import {
+  ActivityIndicator,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,16 +9,25 @@ import {
 } from 'react-native';
 import { useFocusEffect } from "@react-navigation/native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import theme from '../styles/theme';
 
 const JokesScreen = () => {
   const [joke, setJoke] = useState({});
+  const [loading, setLoading] = useState(true);
   const [punchlineVisible, setPunchlineVisible] = useState(false);
+  const getJoke = () => {
+    setLoading(true);
+    fetch("https://official-joke-api.appspot.com/jokes/programming/random")
+      .then((data) => data.json())
+      .then((res) => {
+        setJoke(res[0]);
+        setLoading(false);
+      }
+    )};
 
   useFocusEffect(
     React.useCallback(() => {
-      fetch("https://official-joke-api.appspot.com/jokes/programming/random")
-        .then((data) => data.json())
-        .then((res) => setJoke(res[0]));
+      getJoke();
     },[])
   )
 
@@ -28,12 +38,17 @@ const JokesScreen = () => {
           <Pressable
             style={styles.button}
             onPress={() => setPunchlineVisible(true)}>
+              {!!loading && <ActivityIndicator size={50} color={theme.mainLightColor} style={{padding: 30, paddingBottom: 5}}/>}
               <Text style ={styles.buttonText}>{joke.setup}</Text>
             </Pressable>
             {punchlineVisible &&
               <Pressable
                 style={styles.button}
-                onPress={() => setPunchlineVisible(true)}>
+                onPress={() => {
+                  setJoke({});
+                  setPunchlineVisible(false);
+                  getJoke();
+                }}>
                   <Text style ={styles.buttonText}>{joke.punchline}</Text>
               </Pressable>
             }
@@ -47,16 +62,10 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 70,
-    paddingTop: 200,
-    color: 'black',
-    marginBottom: 30,
+    backgroundColor: theme.backgroundColor
   },
   button: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: theme.lightGreyColor,
     borderRadius:10,
     justifyContent: 'center',
     marginTop: 50,
@@ -65,9 +74,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    color: 'darkblue'
+    color: theme.mainAccentColor
   }
 })
 
