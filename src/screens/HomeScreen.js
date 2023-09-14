@@ -8,58 +8,63 @@ import {
 } from 'react-native';
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import LinearGradient from 'react-native-linear-gradient';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={theme.mainLightColor}/>
-      <ScrollView>
-        <View>
-          <Text style={styles.text}>Main Screen</Text>
-        </View>
         <Pressable
-          style={styles.button}
+          style={{width: '95%'}}
           onPress={() => navigation.navigate('ToDo')}>
+          <LinearGradient start={{x:1,y:0}} end={{x:0,y:0}} colors={theme.buttonColors} style={styles.button}>
             <Text style ={styles.buttonText}>ToDo list</Text>
+          </LinearGradient>
         </Pressable>
-      </ScrollView>
-      <Pressable
-        style={{...styles.button, width: '94%'}}
-        onPress={() => navigation.navigate('Joke')}>
-          <Text style ={styles.buttonText}>Cheer up!</Text>
-      </Pressable>
+        <Pressable
+          style={{width: '95%'}}
+          onPress={() => navigation.navigate('Joke')}>
+          <LinearGradient start={{x:1,y:0}} end={{x:0,y:0}} colors={theme.buttonColors} style={styles.button}>
+            <Text style ={styles.buttonText}>Cheer up!</Text>
+          </LinearGradient>
+        </Pressable>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     height: '100%',
     width: '100%',
     alignItems: 'center',
     backgroundColor: theme.backgroundColor,
   },
-  text: {
-    fontSize: 70,
-    paddingTop: 200,
-    color: 'black',
-    marginBottom: 30,
-  },
   button: {
     backgroundColor: theme.mainLightColor,
-    marginBottom: 10,
-    width: '100%',
-    borderRadius: 15,
+    marginBottom: 25,
+    borderRadius: 50,
     justifyContent: 'center',
+    borderWidth: 4,
+    borderColor: 'white',
     alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 26,
     fontWeight: 'bold',
     paddingVertical: 15,
     color: theme.mainDarkColor,
-    fontSize: 24,
-  }
+  },
+
 })
 
 export default HomeScreen;

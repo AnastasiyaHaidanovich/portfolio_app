@@ -38,7 +38,7 @@ const JokesScreen = () => {
           <Pressable
             style={styles.button}
             onPress={() => setPunchlineVisible(true)}>
-              {!!loading && <ActivityIndicator size={30} color={theme.mainLightColor} style={{padding: 30, paddingBottom: 5}}/>}
+              {!!loading && <ActivityIndicator size={50} color={theme.mainLightColor} style={{padding: 30, paddingBottom: 5}}/>}
               <Text style ={styles.buttonText}>{joke.setup}</Text>
             </Pressable>
             {punchlineVisible &&
@@ -64,12 +64,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: theme.backgroundColor
   },
-  text: {
-    fontSize: 70,
-    paddingTop: 200,
-    color: 'black',
-    marginBottom: 30,
-  },
   button: {
     backgroundColor: theme.lightGreyColor,
     borderRadius:10,
@@ -80,7 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     color: theme.mainAccentColor
   }
