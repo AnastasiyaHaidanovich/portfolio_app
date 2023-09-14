@@ -1,6 +1,8 @@
 class Theme {
   backgroundColor = '#fcfcf5'
 
+  buttonColors = ['#d6ae7b', '#FFED73', '#FFED73', '#FFED73', '#d6ae7b']
+
   mainLightColor = '#FFED73'
 
   mainDarkColor = '#482A83'
