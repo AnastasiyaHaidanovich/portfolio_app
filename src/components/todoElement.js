@@ -1,6 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import theme from '../styles/theme';
-//import CheckBox from '@react-native-community/checkbox';
 import todos from '../store/todos';
 import checkbox from '../../assets/icons/checkbox.png';
 import checked from '../../assets/icons/checked.png';
@@ -14,13 +13,6 @@ export const todoElement = (props) => {
         <TouchableOpacity onPress={() => todos.setTodoDone(props.id)} style={{alignItems: 'center', justifyContent: 'center'}}>
           {props.done ? <Image source={checked} /> : <Image source={checkbox} />}
         </TouchableOpacity>
-
-{//        <CheckBox
-//          disabled={false}
-//          value={todos.todos[props.id - 1].done}
-//          onValueChange={(newValue) => {todos.setTodoDone(props.id-1)}}
-//        />
-}
       </View>
     </View>
   )
