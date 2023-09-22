@@ -3,6 +3,8 @@ class Theme {
 
   buttonColors = ['#d6ae7b', '#FFED73', '#FFED73', '#FFED73', '#d6ae7b']
 
+  inputBackgroundColor = '#fff7c1'
+
   mainLightColor = '#FFED73'
 
   mainDarkColor = '#482A83'

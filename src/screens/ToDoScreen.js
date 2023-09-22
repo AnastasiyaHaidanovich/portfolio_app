@@ -1,38 +1,33 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { observer } from 'mobx-react-lite';
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from '@react-native-community/checkbox';
+import { todoElement } from '../components/todoElement';
+import todos from '../store/todos';
 
-const ToDoScreen = () => {
-
-  const todoElement = () => {
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
-    return (
-      <View style={styles.elementWrap} >
-       <Text style={styles.text}>1</Text>
-       <Text style={{...styles.text, flex: 1}}>First task</Text>
-       <View>
-       <CheckBox
-         disabled={false}
-         value={toggleCheckBox}
-         onValueChange={(newValue) => setToggleCheckBox(newValue)}
-       />
-      </View>
-      </View>
-    )
-  }
+const ToDoScreen = observer(() => {
   return(
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.elementsContainer} >
-          {todoElement()}
-          {todoElement()}
+          {!!todos.todos.length && todos.todos.map((item, idx) => todoElement({...item, idx}))}
         </View>
       </ScrollView>
+      <View>
+        <TextInput
+          style={styles.input}
+          value={todos.todo.text}
+          onChangeText={(text) => todos.setTodoText(text)}
+          blurOnSubmit={true}
+          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && todos.setTodo(value.nativeEvent.text.trim())}
+          placeholder="Write new todo"/>
+      </View>
     </SafeAreaView>
   )
-}
+})
+
 const styles = StyleSheet.create({
   container: {
     height: '100%',
@@ -42,20 +37,16 @@ const styles = StyleSheet.create({
   elementsContainer: {
     margin: 15
   },
-  elementWrap: {
-    width: '100%',
-    marginBottom: 15,
-    backgroundColor: '#fff7c1',
-    borderRadius: 10,
-    padding: 10,
-    display: 'flex',
-    flexDirection: "row",
-    justifyContent: 'space-between'
+  input: {
+    fontSize: 22,
+    margin: 15,
+    padding: 15,
+    paddingLeft: 25,
+    borderWidth: 4,
+    backgroundColor: theme.inputBackgroundColor,
+    borderColor: theme.mainLightColor,
+    borderRadius: 40
   },
-  text: {
-    marginRight: 10,
-    fontSize: 20
-  }
 })
 
 export default ToDoScreen;
