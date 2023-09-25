@@ -21,7 +21,7 @@ const ToDoScreen = observer(() => {
           value={todos.todo.text}
           onChangeText={(text) => todos.setTodoText(text)}
           blurOnSubmit={true}
-          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && todos.setTodo(value.nativeEvent.text.trim())}
+          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && todos.setTodo({text: value.nativeEvent.text.trim()})}
           placeholder="Write new todo"/>
       </View>
     </SafeAreaView>
