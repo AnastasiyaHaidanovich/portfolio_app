@@ -7,7 +7,7 @@ class Todos {
 
   constructor() {
     makeAutoObservable(this);
-    getData().then(res => res.map((todo) => this.setTodo(todo)));
+    getData().then(res => !!res && res.map((todo) => this.setTodo(todo)));
   }
 
   setTodoText(text) {
