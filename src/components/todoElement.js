@@ -1,17 +1,18 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import theme from '../styles/theme';
 import todos from '../store/todos';
-import checkbox from '../../assets/icons/checkbox.png';
-import checked from '../../assets/icons/checked.png';
 
 export const todoElement = (props) => {
   return (
     <View style={styles.elementWrap} key={props.idx} >
-      <Text style={styles.text}>{props.id}</Text>
+      <Text style={styles.text}>{props.idx+1}</Text>
       <Text style={{...styles.text, flex: 1}}>{props.text}</Text>
-      <View>
-        <TouchableOpacity onPress={() => todos.setTodoDone(props.id)} style={{alignItems: 'center', justifyContent: 'center'}}>
-          {props.done ? <Image source={checked} /> : <Image source={checkbox} />}
+      <View style={styles.rightBlock}>
+        <TouchableOpacity onPress={() => todos.removeTodo(props.id)} style={styles.rightBlockItems}>
+           <Text style={{...styles.text, fontSize: 25}}>&#9932;</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => todos.setTodoDone(props.id)} style={styles.rightBlockItems}>
+          {props.done ? <Text style={styles.text}>&#9745;</Text> : <Text style={{...styles.text, fontSize: 25}}>&#9633;</Text>}
         </TouchableOpacity>
       </View>
     </View>
@@ -32,6 +33,17 @@ const styles = StyleSheet.create({
   },
   text: {
     marginRight: 10,
+    lineHeight: 25,
     fontSize: 22
+  },
+  rightBlock: {
+    display: 'flex',
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    width: '17%'
+  },
+  rightBlockItems: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
