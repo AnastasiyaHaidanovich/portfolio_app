@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { getData, storeData } from './store';
 
 class Todos {
   todos = []
@@ -6,6 +7,7 @@ class Todos {
 
   constructor() {
     makeAutoObservable(this);
+    getData().then(res => res.map((todo) => this.setTodo(todo)));
   }
 
   setTodoText(text) {
@@ -14,10 +16,11 @@ class Todos {
 
   setTodo(data) {
     this.todo.id = this.todos.length + 1
-    this.todo.text = data;
-    this.todo.done = false;
+    this.todo.text = data.text;
+    this.todo.done = data.done || false;
     this.todos.push(this.todo);
     this.clearTodo();
+    storeData(this.todos);
   }
 
   setTodoDone(id) {
@@ -25,7 +28,8 @@ class Todos {
   }
 
   removeTodo(id) {
-    this.todos = this.todos.filter((todo) => todo.id !== id)
+    this.todos = this.todos.filter((todo) => todo.id !== id);
+    storeData(this.todos);
   }
 
   clearTodo() {
