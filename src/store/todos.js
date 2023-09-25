@@ -21,7 +21,11 @@ class Todos {
   }
 
   setTodoDone(id) {
-    this.todos[id-1].done = !this.todos[id-1].done
+    this.todos.map((todo) => {if (todo.id == id) todo.done = !todo.done})
+  }
+
+  removeTodo(id) {
+    this.todos = this.todos.filter((todo) => todo.id !== id)
   }
 
   clearTodo() {
