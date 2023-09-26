@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
+import { NativeModules } from 'react-native';
 import Routes from './Routes';
 //function Section({children, title}) {
 //  const isDarkMode = useColorScheme() === 'dark';
@@ -29,6 +30,13 @@ import Routes from './Routes';
 //}
 
 const App = () => {
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      NativeModules.SplashScreenModule.hide();
+    }
+  }, []);
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>

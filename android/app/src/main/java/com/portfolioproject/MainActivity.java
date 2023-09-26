@@ -4,12 +4,13 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
-
+import com.portfolioproject.modules.SplashScreen.SplashScreenModule;
 public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstance) {
     // Call before `super.onCreate`
     setTheme(R.style.AppTheme);
+    SplashScreenModule.show(this);
     super.onCreate(savedInstance);
   }
   /**
