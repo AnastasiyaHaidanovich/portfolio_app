@@ -9,11 +9,17 @@ import {
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import { DateTime } from 'luxon';
+import calendar from '../components/calendar';
 
 const HomeScreen = ({ navigation }) => {
+
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <StatusBar backgroundColor={theme.mainLightColor}/>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.date}>{DateTime.now().setLocale('ru').toFormat('dd LLL yyyy')}</Text>
+        {calendar()}
         <Pressable
           onPress={() => navigation.navigate('ToDo')}>
           <LinearGradient start={{x:1,y:0}} end={{x:0,y:0}} colors={theme.buttonColors} style={styles.button}>
@@ -29,18 +35,27 @@ const HomeScreen = ({ navigation }) => {
 //          </LinearGradient>
 //        </Pressable>
         }
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     height: '100%',
     width: '100%',
     alignItems: 'center',
     backgroundColor: theme.backgroundColor,
+  },
+  date: {
+    marginTop: 10,
+    textAlign: 'right',
+    color: '#0353a4',
+    width: '90%',
+    fontSize: 24,
+    fontFamily: 'Comfortaa-SemiBold'
   },
   button: {
     width: 75,

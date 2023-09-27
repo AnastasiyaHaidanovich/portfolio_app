@@ -19,7 +19,7 @@ const Routes = () => {
   }
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} options={options}/>
+      <Stack.Screen name="Todo" component={HomeScreen} options={options}/>
       <Stack.Screen name="Joke" component={JokesScreen} options={options}/>
       <Stack.Screen name="ToDo" component={ToDoScreen} options={options}/>
     </Stack.Navigator>

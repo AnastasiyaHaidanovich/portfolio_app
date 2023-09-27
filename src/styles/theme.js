@@ -1,7 +1,7 @@
 class Theme {
   backgroundColor = '#fcfcf5'
 
-  buttonColors = ['#d6ae7b', '#FFED73', '#FFED73', '#FFED73', '#d6ae7b']
+  buttonColors = ['#FFED73', '#fcf6bd']
 
   inputBackgroundColor = '#fff7c1'
 
