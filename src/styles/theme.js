@@ -16,6 +16,16 @@ class Theme {
   greyColor = 'grey'
 
   lightGreyColor = 'lightgrey'
+
+  weekendColor = '#fff3b0'
+
+  currentDayColor = '#f7b267'
+
+  selectedDayColor = '#a69cac'
+
+  dayWrapColor = '#faf3dd'
+
+  dateTitleColor = '#0353a4'
 }
 
 const theme = new Theme();

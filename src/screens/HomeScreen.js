@@ -18,7 +18,7 @@ const HomeScreen = ({ navigation }) => {
     <>
       <StatusBar backgroundColor={theme.mainLightColor}/>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.date}>{DateTime.now().setLocale('ru').toFormat('dd LLL yyyy')}</Text>
+        <Text style={styles.date}>{DateTime.now().setLocale('ru').weekdayShort} {DateTime.now().setLocale('ru').toFormat('dd LLL yyyy')}</Text>
         {calendar()}
         <Pressable
           onPress={() => navigation.navigate('ToDo')}>
@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.backgroundColor,
   },
   date: {
-    marginTop: 10,
+    marginTop: 20,
     textAlign: 'right',
-    color: '#0353a4',
+    color: theme.dateTitleColor,
     width: '90%',
-    fontSize: 24,
+    fontSize: 14,
     fontFamily: 'Comfortaa-SemiBold'
   },
   button: {
@@ -78,8 +78,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 50,
     lineHeight: 50,
-//    fontWeight: 'bold',
-//    paddingVertical: 15,
     color: theme.mainDarkColor,
   },
 

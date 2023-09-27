@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from '@react-native-community/checkbox';
 import { todoElement } from '../components/todoElement';
 import todos from '../store/todos';
 
-const ToDoScreen = observer(() => {
+const ToDoScreen = observer(({ navigation }) => {
   return(
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <Pressable style={styles.arrowBack} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.arrow}>&#8592;</Text>
+        </Pressable>
         <View style={styles.elementsContainer} >
           {!!todos.todos.length && todos.todos.map((item, idx) => todoElement({...item, idx}))}
         </View>
@@ -47,6 +50,12 @@ const styles = StyleSheet.create({
     borderColor: theme.mainLightColor,
     borderRadius: 40
   },
+  arrowBack: {
+    padding: 15,
+  },
+  arrow: {
+    fontSize: 30,
+  }
 })
 
 export default ToDoScreen;
