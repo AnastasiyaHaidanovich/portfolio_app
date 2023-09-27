@@ -41,8 +41,9 @@ const calendar = () => {
       DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.fromISO(date).toFormat('dd.MM.yy') && styles.selectedDayColor,
       DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.now().toFormat('dd.MM.yy') && styles.currentDayColor
     ])
+
     return (
-      <Pressable style={style} onPress={() => setDate(props.date)}>
+      <Pressable style={style} onPress={() => setDate(props.date)} key={props.key}>
         <Text style={styles.calendarDay}>{DateTime.fromISO(props.date).day}</Text>
         <Text style={styles.calendarDay}>{DateTime.fromISO(props.date).setLocale('ru').weekdayShort}</Text>
       </Pressable>
@@ -51,7 +52,7 @@ const calendar = () => {
 
   return (
     <View style={styles.calendarWrap}>
-      {month.map((day, idx) => CalendarDay(day, {key: idx}))}
+      {month.map((day, idx) => CalendarDay({...day, key: idx}))}
     </View>
   )
 }

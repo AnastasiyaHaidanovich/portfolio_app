@@ -1,27 +1,27 @@
 class Theme {
   backgroundColor = '#fcfcf5'
 
-  buttonColors = ['#FFED73', '#fcf6bd']
+  buttonColors = ['#fff8dc', '#fcf6bd']
 
   inputBackgroundColor = '#fff7c1'
 
-  mainLightColor = '#FFED73'
+  mainLightColor = '#fff8dc'
 
-  mainDarkColor = '#482A83'
+  mainDarkColor = '#8e9aaf'
 
   mainAccentColor = '#071871'
 
   purpleDarkColor = '#58026D'
 
-  greyColor = 'grey'
+  greyColor = '8e9aaf'
 
   lightGreyColor = 'lightgrey'
 
   weekendColor = '#fff3b0'
 
-  currentDayColor = '#f7b267'
+  currentDayColor = '#ffc9b9'
 
-  selectedDayColor = '#a69cac'
+  selectedDayColor = '#cbc0d3'
 
   dayWrapColor = '#faf3dd'
 
