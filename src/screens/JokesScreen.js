@@ -17,10 +17,10 @@ const JokesScreen = () => {
   const [punchlineVisible, setPunchlineVisible] = useState(false);
   const getJoke = () => {
     setLoading(true);
-    fetch("https://official-joke-api.appspot.com/jokes/programming/random")
+    fetch("https://official-joke-api.appspot.com/jokes/random")
       .then((data) => data.json())
       .then((res) => {
-        setJoke(res[0]);
+        setJoke(res);
         setLoading(false);
       }
     )};
