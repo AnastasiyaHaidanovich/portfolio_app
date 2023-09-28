@@ -9,37 +9,40 @@ import {
 import theme from '../styles/theme';
 
 const calendar = () => {
-  const [date, setDate] = useState(DateTime.now())
-  let month = []
+  const [date, setDate] = useState(DateTime.now());
+  const [switchedMonth, setSwitchedMonth] = useState(0);
 
-  for (let i = 1; i < DateTime.now().startOf('month').weekday; i++){
-    month.unshift({
-      date:DateTime.now().startOf('month').minus({days: i}),
-      currentWeek: false
+  let currentMonth = DateTime.now().minus({month: switchedMonth});
+  let calendarMonth = [];
+
+  for (let i = 1; i < currentMonth.startOf('month').weekday; i++){
+    calendarMonth.unshift({
+      date: currentMonth.startOf('month').minus({days: i}),
+      activeMonth: false
     })
   }
 
-  for (let i = 0; i < DateTime.now().daysInMonth; i++){
-    month.push({
-      date: DateTime.now().startOf('month').plus({days: i}),
-      currentWeek: true
+  for (let i = 0; i < currentMonth.daysInMonth; i++){
+    calendarMonth.push({
+      date: currentMonth.startOf('month').plus({days: i}),
+      activeMonth: true
     })
   }
 
-  for (let i = 1; i <= DateTime.now().endOf('month').endOf('week').diff(DateTime.now().endOf('month'), ['days']).toObject().days; i++){
-    month.push({
-      date: DateTime.now().endOf('month').plus({days: i}),
-      currentWeek: false
+  for (let i = 1; i <= currentMonth.endOf('month').endOf('week').diff(currentMonth.endOf('month'), ['days']).toObject().days; i++){
+    calendarMonth.push({
+      date: currentMonth.endOf('month').plus({days: i}),
+      activeMonth: false
     })
   }
 
   const CalendarDay = (props) => {
     const style = StyleSheet.flatten([
       styles.dayWrap,
-      !props.currentWeek ? styles.opacity : null,
+      !props.activeMonth ? styles.opacity : null,
       DateTime.fromISO(props.date).weekday == 6 || DateTime.fromISO(props.date).weekday == 7 ? styles.weekendColor : null,
-      DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.fromISO(date).toFormat('dd.MM.yy') && styles.selectedDayColor,
-      DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.now().toFormat('dd.MM.yy') && styles.currentDayColor
+      DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.now().toFormat('dd.MM.yy') && styles.currentDayColor,
+      DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.fromISO(date).toFormat('dd.MM.yy') && styles.selectedDayColor
     ])
 
     return (
@@ -51,9 +54,19 @@ const calendar = () => {
   }
 
   return (
-    <View style={styles.calendarWrap}>
-      {month.map((day, idx) => CalendarDay({...day, key: idx}))}
-    </View>
+    <>
+      <View style={styles.calendarHeader}>
+        <Pressable onPress={() => setSwitchedMonth(switchedMonth + 1)}>
+          <Text style={styles.calendarDay}>{currentMonth.minus({month: 1}).setLocale('ru').monthLong}</Text>
+        </Pressable>
+        <Pressable onPress={() => setSwitchedMonth(switchedMonth - 1)}>
+          <Text style={styles.calendarDay}>{currentMonth.plus({month: 1}).setLocale('ru').monthLong}</Text>
+        </Pressable>
+      </View>
+      <View style={styles.calendarWrap}>
+        {calendarMonth.map((day, idx) => CalendarDay({...day, key: idx}))}
+      </View>
+    </>
   )
 }
 
@@ -64,8 +77,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 50,
     paddingHorizontal: 10
+  },
+  calendarHeader: {
+    marginTop: 30,
+    marginBottom: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%'
   },
   dayWrap: {
     display:'flex',
