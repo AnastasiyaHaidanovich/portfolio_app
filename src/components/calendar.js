@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   dayWrap: {
     display:'flex',
-    width: 45,
+    width: '10%',
     backgroundColor: theme.dayWrapColor,
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
