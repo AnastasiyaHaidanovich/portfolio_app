@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginBottom: 50
   },
   calendarHeader: {
     marginTop: 30,

@@ -4,7 +4,6 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from '@react-native-community/checkbox';
-import { todoElement } from '../components/todoElement';
 import todos from '../store/todos';
 
 const ToDoScreen = observer(({ navigation }) => {
@@ -14,9 +13,7 @@ const ToDoScreen = observer(({ navigation }) => {
         <Pressable style={styles.arrowBack} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.arrow}>&#8592;</Text>
         </Pressable>
-        <View style={styles.elementsContainer} >
-          {!!todos.todos.length && todos.todos.map((item, idx) => todoElement({...item, idx}))}
-        </View>
+
       </ScrollView>
       <View>
         <TextInput
@@ -36,9 +33,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     backgroundColor: theme.backgroundColor,
-  },
-  elementsContainer: {
-    margin: 15
   },
   input: {
     fontSize: 22,
