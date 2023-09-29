@@ -11,7 +11,7 @@ class Store {
     getData().then(res => !!res && res.map((todo) => this.setTodo(todo)));
   }
 
-  setTodo(data) {
+  setTodo({data}) {
     this.todos.push({
       date: this.selectedDate,
       data: {
@@ -24,7 +24,8 @@ class Store {
   }
 
   setTodoDone(id) {
-    this.todos.map((todo) => {if (todo.data.id == id) todo.data.done = !todo.data.done})
+    this.todos.map((todo) => {if (todo.data.id == id) todo.data.done = !todo.data.done});
+    storeData(this.todos);
   }
 
   removeTodo(id) {
@@ -34,7 +35,6 @@ class Store {
 
   setSelectedDate(date) {
     this.selectedDate = date.toFormat('dd.MM.yy');
-    console.log('selDate in store', this.selectedDate)
   }
 }
 

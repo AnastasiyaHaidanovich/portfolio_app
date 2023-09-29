@@ -20,7 +20,7 @@ const ToDoScreen = observer(({ navigation }) => {
           style={styles.input}
           value={store.text}
           blurOnSubmit={true}
-          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && store.setTodo({text: value.nativeEvent.text.trim()})}
+          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && store.setTodo({data:{text: value.nativeEvent.text.trim()}})}
           placeholder="Write new todo"/>
       </View>
     </SafeAreaView>
