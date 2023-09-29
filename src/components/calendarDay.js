@@ -2,7 +2,8 @@ import{ DateTime } from 'luxon';
 import {
   Pressable,
   StyleSheet,
-  Text
+  Text,
+  View
 } from 'react-native';
 import theme from '../styles/theme';
 import store from '../store/store';
@@ -24,6 +25,12 @@ export const calendarDay = (props) => {
         store.setSelectedDate(props.date);
       }}
       key={props.key}>
+      {store.todos.map(elem =>
+        elem.date == props.date.toFormat('dd.MM.yy')
+        && (
+          <View style={styles.redCircle} key={props.key}></View>
+        )
+      )}
       <Text style={styles.calendarDay}>{DateTime.fromISO(props.date).day}</Text>
       <Text style={styles.calendarDay}>{DateTime.fromISO(props.date).setLocale('ru').weekdayShort}</Text>
     </Pressable>
@@ -63,5 +70,14 @@ const styles = StyleSheet.create({
   },
   selectedDayColor: {
     backgroundColor: theme.selectedDayColor
+  },
+  redCircle: {
+    position: 'absolute',
+    right: -3,
+    borderRadius: 5,
+    width: 10,
+    height: 10,
+    borderColor: 'red',
+    borderWidth: 1
   }
 })

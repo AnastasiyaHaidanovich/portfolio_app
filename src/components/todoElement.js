@@ -5,7 +5,6 @@ import store from '../store/store';
 export const todoElement = (props) => {
   return (
     <View style={styles.elementWrap} key={props.idx} >
-      <Text style={styles.text}>{props.idx+1}</Text>
       <Text style={{...styles.text, flex: 1}}>{props.data.text}</Text>
       <View style={styles.rightBlock}>
         <TouchableOpacity onPress={() => store.removeTodo(props.data.id)} style={styles.rightBlockItems}>
@@ -26,6 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.inputBackgroundColor,
     borderRadius: 10,
     padding: 10,
+    paddingLeft: 25,
     display: 'flex',
     flexDirection: "row",
     justifyContent: 'space-between',
