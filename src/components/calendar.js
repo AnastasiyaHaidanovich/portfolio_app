@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import theme from '../styles/theme';
 import { calendarDay } from './calendarDay';
+import { observer } from 'mobx-react-lite';
 
-const calendar = () => {
+const Calendar = observer(() => {
   const [date, setDate] = useState(DateTime.now().toFormat('dd.MM.yy'));
   const [switchedMonth, setSwitchedMonth] = useState(0);
 
@@ -52,7 +53,7 @@ const calendar = () => {
       </View>
     </>
   )
-}
+})
 
 const styles = StyleSheet.create({
   calendarWrap: {
@@ -75,4 +76,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default calendar;
+export default Calendar;

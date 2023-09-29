@@ -11,7 +11,7 @@ import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { DateTime } from 'luxon';
-import calendar from '../components/calendar';
+import Calendar from '../components/calendar';
 import TodoListBlock from '../components/todoListBlock';
 
 const windowWidth = Dimensions.get('window').width;
@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
       <StatusBar backgroundColor={theme.mainLightColor}/>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.date}>{DateTime.now().setLocale('ru').weekdayShort} {DateTime.now().setLocale('ru').toFormat('dd LLL yyyy')}</Text>
-        {calendar()}
+        <Calendar />
         <TodoListBlock />
         </ScrollView>
         <Pressable style={styles.buttonWrap}
