@@ -1,12 +1,12 @@
 import { StyleSheet, View } from 'react-native';
 import { todoElement } from './todoElement';
-import todos from '../store/todos';
+import store from '../store/store';
 import { observer } from 'mobx-react-lite';
 
 const TodoListBlock = observer((props) => {
   return (
     <View style={styles.elementsContainer} >
-      {!!todos.todos.length && todos.todos.map((item, idx) => todoElement({...item, idx}))}
+      {!!store.todos.length && store.todos.map((item, idx) => item.date === store.selectedDate && todoElement({...item, idx}))}
     </View>
   )
 })
