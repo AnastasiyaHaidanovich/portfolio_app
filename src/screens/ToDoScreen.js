@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from '@react-native-community/checkbox';
-import todos from '../store/todos';
+import store from '../store/store';
 
 const ToDoScreen = observer(({ navigation }) => {
   return(
@@ -18,10 +18,9 @@ const ToDoScreen = observer(({ navigation }) => {
       <View>
         <TextInput
           style={styles.input}
-          value={todos.todo.text}
-          onChangeText={(text) => todos.setTodoText(text)}
+          value={store.text}
           blurOnSubmit={true}
-          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && todos.setTodo({text: value.nativeEvent.text.trim()})}
+          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && store.setTodo({data:{text: value.nativeEvent.text.trim()}})}
           placeholder="Write new todo"/>
       </View>
     </SafeAreaView>

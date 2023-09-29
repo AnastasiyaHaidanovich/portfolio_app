@@ -1,19 +1,41 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { makeAutoObservable } from 'mobx';
+import { getData, storeData } from './storage';
+import{ DateTime } from 'luxon';
 
-export async function storeData (value) {
-  try {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('my-key', jsonValue);
-  } catch (e) {
-  console.log(e)
-  }
-};
+class Store {
+  todos = []
+  selectedDate = DateTime.now().toFormat('dd.MM.yy')
 
-export async function getData () {
-  try {
-    const jsonValue = await AsyncStorage.getItem('my-key');
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    console.log(e)
+  constructor() {
+    makeAutoObservable(this);
+    getData().then(res => !!res && res.map((todo) => this.setTodo(todo)));
   }
-};
+
+  setTodo({data}) {
+    this.todos.push({
+      date: this.selectedDate,
+      data: {
+        id: this.todos.length + 1,
+        text: data.text,
+        done: data.done || false
+      }
+    });
+    storeData(this.todos);
+  }
+
+  setTodoDone(id) {
+    this.todos.map((todo) => {if (todo.data.id == id) todo.data.done = !todo.data.done});
+    storeData(this.todos);
+  }
+
+  removeTodo(id) {
+    this.todos = this.todos.filter((todo) => todo.data.id !== id);
+    storeData(this.todos);
+  }
+
+  setSelectedDate(date) {
+    this.selectedDate = date.toFormat('dd.MM.yy');
+  }
+}
+
+export default new Store();
