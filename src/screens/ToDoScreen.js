@@ -7,22 +7,33 @@ import CheckBox from '@react-native-community/checkbox';
 import store from '../store/store';
 
 const ToDoScreen = observer(({ navigation }) => {
+  const [ text, setText ] = useState('')
+
   return(
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Pressable style={styles.arrowBack} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.arrow}>&#8592;</Text>
         </Pressable>
-
+        <View style={styles.wrap}>
+          <Text style={styles.title}>Новая задача</Text>
+          <TextInput
+            style={styles.input}
+            value={store.text}
+            blurOnSubmit={true}
+            onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && setText({data:{text: value.nativeEvent.text.trim()}})}
+            placeholder="Название задачи"/>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              store.setTodo(text);
+              navigation.navigate('Home');
+            }}
+          >
+            <Text style={styles.buttonText}>Добавить задачу</Text>
+          </Pressable>
+        </View>
       </ScrollView>
-      <View>
-        <TextInput
-          style={styles.input}
-          value={store.text}
-          blurOnSubmit={true}
-          onSubmitEditing={(value) => !!value.nativeEvent.text.trim() && store.setTodo({data:{text: value.nativeEvent.text.trim()}})}
-          placeholder="Write new todo"/>
-      </View>
     </SafeAreaView>
   )
 })
@@ -33,21 +44,58 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: theme.backgroundColor,
   },
+  wrap: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    backgroundColor: '#ffffea',
+    margin: 20,
+//    height: 500,
+    borderTopLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    shadowColor: theme.mainAccentColor,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+    overflow: 'hidden'
+  },
+  title: {
+    lineHeight: 26,
+    fontSize: 24,
+    color: theme.mainAccentColor,
+    padding: 20,
+    textAlign: 'center',
+    fontFamily: 'Comfortaa'
+  },
   input: {
     fontSize: 22,
     margin: 15,
-    padding: 15,
-    paddingLeft: 25,
-    borderWidth: 4,
-    backgroundColor: theme.inputBackgroundColor,
-    borderColor: theme.mainLightColor,
-    borderRadius: 40
+    marginHorizontal: 25,
+    fontFamily: 'Comfortaa',
+    borderBottomColor: theme.mainAccentColor,
+    borderBottomWidth: 1,
+    marginBottom: 250
   },
   arrowBack: {
     padding: 15,
   },
   arrow: {
     fontSize: 30,
+  },
+  button: {
+    backgroundColor: theme.mainAccentColor,
+    width: '100%',
+    padding: 25,
+  },
+  buttonText: {
+    textAlign:'center',
+    fontWeight:'bold',
+    fontFamily: 'Comfortaa',
+    fontSize: 22,
+    color: 'white'
   }
 })
 

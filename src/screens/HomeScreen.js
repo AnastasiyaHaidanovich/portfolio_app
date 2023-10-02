@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar backgroundColor={theme.mainLightColor}/>
+      <StatusBar backgroundColor={theme.backgroundColor} barStyle={'dark-content'}/>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.date}>{DateTime.now().setLocale('ru').weekdayShort} {DateTime.now().setLocale('ru').toFormat('dd LLL yyyy')}</Text>
         <Calendar />
