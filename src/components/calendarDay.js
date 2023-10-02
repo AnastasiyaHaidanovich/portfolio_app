@@ -28,7 +28,7 @@ export const calendarDay = (props) => {
       {store.todos.map(elem =>
         elem.date == props.date.toFormat('dd.MM.yy')
         && (
-          <View style={styles.redCircle} key={props.key}></View>
+          <View style={styles.redCircle} key={elem.data.id}></View>
         )
       )}
       <Text style={styles.calendarDay}>{DateTime.fromISO(props.date).day}</Text>
