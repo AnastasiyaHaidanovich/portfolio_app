@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
     margin: 5,
-    shadowColor: "#000",
+    shadowColor: theme.mainAccentColor,
     shadowOffset: {
       width: 0,
       height: 3,

@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     backgroundColor: theme.backgroundColor,
+    paddingBottom: 100
   },
   date: {
     marginTop: 20,
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 9,
     alignItems: 'center',
-    shadowColor: "#000",
+    shadowColor: theme.mainAccentColor,
     shadowOffset: {
     	width: 0,
     	height: 3,

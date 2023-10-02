@@ -73,7 +73,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '90%'
   },
-
+  calendarDay: {
+    fontFamily: 'Comfortaa'
+  }
 })
 
 export default Calendar;

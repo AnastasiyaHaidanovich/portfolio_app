@@ -3,7 +3,7 @@ class Theme {
 
   buttonColors = ['#fff8dc', '#fcf6bd']
 
-  inputBackgroundColor = '#fff7c1'
+  inputBackgroundColor = '#faf3dd'
 
   mainLightColor = '#fff8dc'
 

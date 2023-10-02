@@ -3,8 +3,10 @@ import theme from '../styles/theme';
 import store from '../store/store';
 
 export const todoElement = (props) => {
+  const style = StyleSheet.flatten([styles.elementWrap, props.data.done && styles.blurElement])
+
   return (
-    <View style={styles.elementWrap} key={props.idx} >
+    <View style={style} key={props.idx} >
       <Text style={{...styles.text, flex: 1}}>{props.data.text}</Text>
       <View style={styles.rightBlock}>
         <TouchableOpacity onPress={() => store.removeTodo(props.data.id)} style={styles.rightBlockItems}>
@@ -23,18 +25,34 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 15,
     backgroundColor: theme.inputBackgroundColor,
-    borderRadius: 10,
-    padding: 10,
+    paddingVertical: 10,
     paddingLeft: 25,
     display: 'flex',
     flexDirection: "row",
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRightWidth: 20,
+    borderColor: theme.selectedDayColor,
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    shadowColor: theme.mainAccentColor,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+  blurElement:{
+    opacity: 0.7
   },
   text: {
     marginRight: 10,
-    lineHeight: 25,
-    fontSize: 22
+    lineHeight: 22,
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'Comfortaa'
   },
   rightBlock: {
     display: 'flex',
