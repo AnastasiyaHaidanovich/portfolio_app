@@ -34,7 +34,11 @@ class Store {
   }
 
   setSelectedDate(date) {
-    this.selectedDate = date.toFormat('dd.MM.yy');
+    if (date === '') {
+      this.selectedDate = '';
+    } else {
+      this.selectedDate = date.toFormat('dd.MM.yy');
+    }
   }
 }
 

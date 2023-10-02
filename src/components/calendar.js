@@ -9,6 +9,7 @@ import {
 import theme from '../styles/theme';
 import { calendarDay } from './calendarDay';
 import { observer } from 'mobx-react-lite';
+import store from '../store/store';
 
 const Calendar = observer(() => {
   const [date, setDate] = useState(DateTime.now().toFormat('dd.MM.yy'));
@@ -41,11 +42,25 @@ const Calendar = observer(() => {
   return (
     <>
       <View style={styles.calendarHeader}>
-        <Pressable onPress={() => setSwitchedMonth(switchedMonth + 1)}>
-          <Text style={styles.calendarDay}>{currentMonth.minus({month: 1}).setLocale('ru').monthLong}</Text>
+        <Pressable
+          onPress={() => {
+            store.setSelectedDate('');
+            setSwitchedMonth(switchedMonth + 1);
+          }}
+        >
+          <Text style={styles.calendarDay}>
+            {currentMonth.minus({month: 1}).setLocale('ru').monthLong}
+          </Text>
         </Pressable>
-        <Pressable onPress={() => setSwitchedMonth(switchedMonth - 1)}>
-          <Text style={styles.calendarDay}>{currentMonth.plus({month: 1}).setLocale('ru').monthLong}</Text>
+        <Pressable
+          onPress={() => {
+            store.setSelectedDate('');
+            setSwitchedMonth(switchedMonth - 1);
+          }}
+        >
+          <Text style={styles.calendarDay}>
+            {currentMonth.plus({month: 1}).setLocale('ru').monthLong}
+          </Text>
         </Pressable>
       </View>
       <View style={styles.calendarWrap}>

@@ -14,7 +14,7 @@ export const calendarDay = (props) => {
     styles.dayWrap,
     !props.activeMonth ? styles.opacity : null,
     DateTime.fromISO(props.date).weekday == 6 || DateTime.fromISO(props.date).weekday == 7 ? styles.weekendColor : null,
-    DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.now().toFormat('dd.MM.yy') && styles.currentDayColor,
+    DateTime.fromISO(props.date).toFormat('dd.MM.yy') == DateTime.now().toFormat('dd.MM.yy') && styles.currentDayStyle,
     DateTime.fromISO(props.date).toFormat('dd.MM.yy') == store.selectedDate && styles.selectedDayColor
   ])
 
@@ -65,8 +65,10 @@ const styles = StyleSheet.create({
   weekendColor: {
     backgroundColor: theme.weekendColor
   },
-  currentDayColor: {
-    backgroundColor: theme.currentDayColor
+  currentDayStyle: {
+    borderColor: theme.currentDayColor,
+    borderBottomWidth: 0.5,
+    borderRightWidth: 1.5
   },
   selectedDayColor: {
     backgroundColor: theme.selectedDayColor

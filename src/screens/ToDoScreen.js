@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 import theme from '../styles/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from '@react-native-community/checkbox';
@@ -11,6 +11,7 @@ const ToDoScreen = observer(({ navigation }) => {
 
   return(
     <SafeAreaView style={styles.container}>
+    <StatusBar backgroundColor={'#e7e6f7'} barStyle={'dark-content'}/>
       <ScrollView>
         <Pressable style={styles.arrowBack} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.arrow}>&#8592;</Text>
@@ -25,6 +26,7 @@ const ToDoScreen = observer(({ navigation }) => {
             placeholder="Название задачи"/>
           <Pressable
             style={styles.button}
+            disabled={text == ''}
             onPress={() => {
               store.setTodo(text);
               navigation.navigate('Home');
@@ -42,12 +44,12 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    backgroundColor: theme.backgroundColor,
+    backgroundColor: '#e7e6f7',
   },
   wrap: {
     display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#ffffea',
+    backgroundColor: '#fbfbf2',
     margin: 20,
 //    height: 500,
     borderTopLeftRadius: 50,
